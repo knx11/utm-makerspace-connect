@@ -2,10 +2,8 @@ import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import { Calendar, FileImage, UserCheck } from "lucide-react";
 import makerspaceLogo from "@/assets/makerspace-room.png";
-
 const HowItWorks = () => {
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navigation />
       <main className="container mx-auto px-4 pt-32 pb-16">
         <div className="max-w-4xl mx-auto text-center space-y-12 fade-in">
@@ -43,11 +41,7 @@ const HowItWorks = () => {
           <div className="h-px bg-foreground/20 max-w-md mx-auto" />
 
           <div className="pt-8">
-            <img 
-              src={makerspaceLogo} 
-              alt="Makerspace Logo" 
-              className="max-w-2xl w-full h-auto mx-auto"
-            />
+            
           </div>
 
           <div className="bg-card rounded-3xl p-8 max-w-2xl mx-auto shadow-lg">
@@ -75,8 +69,6 @@ const HowItWorks = () => {
           </div>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default HowItWorks;
