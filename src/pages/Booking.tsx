@@ -63,20 +63,21 @@ const Booking = () => {
           </div>
 
           <div className="text-center space-y-6 pt-8">
-            <div className="bg-card rounded-3xl p-8 max-w-md mx-auto shadow-lg inline-block">
-              <div className="w-48 h-48 mx-auto bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center">
-                <span className="text-6xl">📱</span>
+            <div className="bg-card rounded-3xl p-8 max-w-2xl mx-auto shadow-lg">
+              <div className="space-y-4">
+                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center">
+                  <span className="text-4xl">🎓</span>
+                </div>
+                <h3 className="text-2xl font-bold">Request a Workshop</h3>
+                <p className="text-muted-foreground max-w-lg mx-auto">
+                  Want to learn a new skill or need a custom workshop for your group? 
+                  Let us know what you'd like to learn!
+                </p>
+                <button className="btn-makerspace mx-auto">
+                  Submit Workshop Request
+                </button>
               </div>
-              <p className="mt-4 text-sm text-muted-foreground">
-                Scan QR code for external booking
-              </p>
             </div>
-            <p className="text-sm text-muted-foreground max-w-xl mx-auto">
-              Need help choosing a machine? Try our{" "}
-              <a href="/how-it-works" className="underline font-semibold">
-                How It Works page
-              </a>
-            </p>
           </div>
         </div>
       </main>
