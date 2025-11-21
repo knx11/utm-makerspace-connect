@@ -2,6 +2,12 @@ import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import { Calendar, FileImage, UserCheck } from "lucide-react";
 import makerspaceLogo from "@/assets/makerspace-room.png";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 const HowItWorks = () => {
   return <div className="min-h-screen">
       <Navigation />
@@ -45,27 +51,35 @@ const HowItWorks = () => {
           </div>
 
           <div className="bg-card rounded-3xl p-8 max-w-2xl mx-auto shadow-lg">
-            <h3 className="text-2xl font-bold mb-4">Frequently Asked Questions</h3>
-            <div className="space-y-4 text-left">
-              <div>
-                <h4 className="font-semibold text-lg">Do I need experience?</h4>
-                <p className="text-muted-foreground">
+            <h3 className="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h3>
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="item-1">
+                <AccordionTrigger className="text-left font-semibold text-lg">
+                  Do I need experience?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
                   Not at all! We provide tutorials and staff support for all skill levels.
-                </p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-lg">Can I bring my own materials?</h4>
-                <p className="text-muted-foreground">
+                </AccordionContent>
+              </AccordionItem>
+              
+              <AccordionItem value="item-2">
+                <AccordionTrigger className="text-left font-semibold text-lg">
+                  Can I bring my own materials?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
                   Yes! You can bring your own materials or purchase them from us.
-                </p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-lg">What file types do you accept?</h4>
-                <p className="text-muted-foreground">
+                </AccordionContent>
+              </AccordionItem>
+              
+              <AccordionItem value="item-3">
+                <AccordionTrigger className="text-left font-semibold text-lg">
+                  What file types do you accept?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
                   We accept .stl, .svg, .png, and other common design file formats.
-                </p>
-              </div>
-            </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
       </main>
