@@ -1,75 +1,118 @@
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
-import makerspaceRoom from "@/assets/makerspace-room.png";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
 import { toast } from "sonner";
 const Workshops = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const workshops = [{
-    title: "SESSION 1: 3D PRINTING BASICS",
-    schedule: "TUESDAYS 3 PM",
-    description: "Learn the fundamentals of 3D printing and create your first print"
-  }, {
-    title: "SESSION 2: BUILD WITH OTHERS",
-    schedule: "THURSDAYS 1 PM",
-    description: "Collaborative building sessions with fellow makers"
-  }];
-  const handleJoinGroup = () => {
-    toast.success("You've joined the workshop group!");
+  
+  const workshops = [
+    {
+      title: "3D Printing Basics",
+      schedule: "Tuesdays 3 PM",
+      description: "Learn the fundamentals of 3D printing, from design to finished product. No experience needed!"
+    },
+    {
+      title: "Build With Others",
+      schedule: "Thursdays 1 PM",
+      description: "Open collaboration session where students work on projects together and share ideas."
+    },
+    {
+      title: "Laser Cutting Workshop",
+      schedule: "Wednesdays 2 PM",
+      description: "Master the laser cutter and create intricate designs on various materials."
+    }
+  ];
+
+  const filteredWorkshops = workshops.filter((workshop) =>
+    workshop.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    workshop.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleJoinGroup = (title: string) => {
+    toast.success(`You've joined ${title}!`);
   };
-  const handleReserveNow = () => {
-    toast.success("Workshop spot reserved!");
+
+  const handleReserveNow = (title: string) => {
+    toast.success(`Spot reserved for ${title}!`);
   };
-  return <div className="min-h-screen">
+
+  const handleSuggestWorkshop = () => {
+    toast.success("Workshop suggestion submitted!");
+  };
+
+  return (
+    <div className="min-h-screen">
       <Navigation />
       <main className="container mx-auto px-4 pt-32 pb-16">
-        <div className="max-w-6xl mx-auto space-y-12 fade-in">
-          <div className="text-center space-y-6">
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-              JOIN WORKSHOP
+        <div className="max-w-4xl mx-auto space-y-12 fade-in">
+          <div className="text-center space-y-4">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+              Join a Workshop – Learn & Build Together
             </h1>
-            <h2 className="text-3xl md:text-4xl font-semibold">
-              WELCOME TO UTM<br />MAKERSPACE
-            </h2>
+            <p className="text-lg text-muted-foreground">
+              Find your community and create together.
+            </p>
           </div>
 
-          <div className="max-w-2xl mx-auto relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-            <Input type="text" placeholder="Search workshops (e.g. 3D printing, laser cutting)" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pl-12 py-6 text-lg rounded-full shadow-lg" />
+          <div className="max-w-2xl mx-auto">
+            <Input
+              type="text"
+              placeholder="Search workshops (e.g. 3D printing, laser cutting)"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="py-6 text-base rounded-3xl bg-card/80 border-none shadow-sm"
+            />
           </div>
 
-          <div className="space-y-6 max-w-3xl mx-auto">
-            {workshops.map(workshop => <div key={workshop.title} className="btn-makerspace text-center py-6">
-                <h3 className="font-bold text-xl mb-2">{workshop.title}</h3>
-                <p className="text-lg">{workshop.schedule}</p>
-              </div>)}
-
-            <div className="btn-makerspace text-center py-6 flex items-center justify-center gap-3">
-              <span className="text-xl font-bold">JOIN GROUP</span>
-              <Wrench className="w-6 h-6 text-primary" />
-            </div>
+          <div className="space-y-6">
+            {filteredWorkshops.map((workshop) => (
+              <div
+                key={workshop.title}
+                className="bg-card rounded-3xl p-8 shadow-md"
+              >
+                <h3 className="text-2xl font-bold mb-1">{workshop.title}</h3>
+                <p className="text-base font-semibold text-foreground mb-4">
+                  {workshop.schedule}
+                </p>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  {workshop.description}
+                </p>
+                <div className="flex gap-3">
+                  <Button
+                    onClick={() => handleJoinGroup(workshop.title)}
+                    variant="outline"
+                    className="flex-1 rounded-full border-2 border-foreground bg-card hover:bg-foreground/5 font-semibold"
+                  >
+                    Join Group
+                  </Button>
+                  <Button
+                    onClick={() => handleReserveNow(workshop.title)}
+                    className="flex-1 rounded-full border-2 border-primary bg-card hover:bg-primary/5 text-foreground font-semibold"
+                    variant="outline"
+                  >
+                    Reserve Now
+                  </Button>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div className="text-center space-y-6">
-            <h3 className="text-3xl font-bold">RESERVE NOW</h3>
-            <div className="max-w-4xl mx-auto">
-              
-            </div>
-            <div className="flex gap-4 justify-center flex-wrap">
-              <button onClick={handleJoinGroup} className="btn-makerspace px-12">
-                Join Group
-              </button>
-              <button onClick={handleReserveNow} className="btn-makerspace px-12">
-                Reserve Now
-              </button>
-            </div>
+          <div className="text-center pt-4">
+            <Button
+              onClick={handleSuggestWorkshop}
+              variant="outline"
+              className="rounded-full border-2 border-foreground bg-card hover:bg-foreground/5 font-semibold px-8 py-6 text-base"
+            >
+              <Plus className="w-5 h-5 mr-2" />
+              Suggest a Workshop
+            </Button>
           </div>
         </div>
       </main>
-    </div>;
+    </div>
+  );
 };
 
-// Import Wrench icon
-import { Wrench } from "lucide-react";
 export default Workshops;
