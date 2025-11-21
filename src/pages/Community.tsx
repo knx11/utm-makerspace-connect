@@ -60,42 +60,42 @@ const Community = () => {
             </p>
           </div>
 
-          <div className="max-w-2xl mx-auto relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+          <div className="max-w-2xl mx-auto">
             <Input
               type="text"
               placeholder="Search groups (e.g. robotics, film, 3D art, coding)"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-12 py-6 text-lg rounded-full shadow-lg"
+              className="py-6 text-base rounded-3xl bg-card/80 border-none shadow-sm"
             />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {filteredCommunities.map((community) => (
               <div
                 key={community.name}
-                className="bg-card rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                className="bg-card rounded-3xl p-8 shadow-md"
               >
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="bg-primary/20 rounded-full p-3">
-                    <Users className="w-6 h-6 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold mb-2">{community.name}</h3>
-                    <p className="text-muted-foreground mb-3">{community.description}</p>
-                    <div className="space-y-1 text-sm">
-                      <p className="font-semibold">{community.meetingTime}</p>
-                      <p className="text-muted-foreground">{community.members} members</p>
-                    </div>
-                  </div>
+                <h3 className="text-2xl font-bold mb-1">{community.name}</h3>
+                <p className="text-base font-semibold text-foreground mb-4">{community.meetingTime}</p>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  {community.description}
+                </p>
+                <div className="flex gap-3">
+                  <Button
+                    onClick={() => handleJoinGroup(community.name)}
+                    variant="outline"
+                    className="flex-1 rounded-full border-2 border-foreground bg-card hover:bg-foreground/5 font-semibold"
+                  >
+                    Join Group
+                  </Button>
+                  <Button
+                    className="flex-1 rounded-full border-2 border-primary bg-card hover:bg-primary/5 text-foreground font-semibold"
+                    variant="outline"
+                  >
+                    View Details
+                  </Button>
                 </div>
-                <Button
-                  onClick={() => handleJoinGroup(community.name)}
-                  className="w-full btn-makerspace"
-                >
-                  Join Group
-                </Button>
               </div>
             ))}
           </div>
